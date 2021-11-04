@@ -8,9 +8,7 @@ drop table if exists CLIENTESXCOMPRAS;
 
 drop table if exists COMPRAS;
 
-drop table if exists FACTURAS;
-
-drop table if exists FACTURASXPRODUCTOS;
+drop table if exists COMPRASXPRODUCTOS;
 
 drop table if exists PRODUCTOS;
 
@@ -21,10 +19,9 @@ drop table if exists USUARIOS;
 /*==============================================================*/
 create table CATEGORIAS
 (
-   IDCATEGORIAS         integer not null auto_increment,
-   IDPRODUCTOS          integer,
+   IDCATEGORIA          integer not null auto_increment,
    NOMBRECATEGORIA      varchar(50),
-   primary key (IDCATEGORIAS)
+   primary key (IDCATEGORIA)
 );
 
 /*==============================================================*/
@@ -32,10 +29,9 @@ create table CATEGORIAS
 /*==============================================================*/
 create table CIUDADES
 (
-   IDCIUDADES           integer not null auto_increment,
-   IDCLIENTES           integer,
+   IDCIUDAD             integer not null auto_increment,
    CIUDAD               varchar(50) not null,
-   primary key (IDCIUDADES)
+   primary key (IDCIUDAD)
 );
 
 /*==============================================================*/
@@ -43,15 +39,15 @@ create table CIUDADES
 /*==============================================================*/
 create table CLIENTES
 (
-   IDCLIENTES           integer not null auto_increment,
-   IDUSUARIOS           integer,
+   IDCLIENTE            integer not null auto_increment,
+   IDCIUDAD             integer,
    NOMBRE               varchar(50) not null,
    APELLIDO             varchar(50) not null,
    IDENTIFICACION       varchar(13) not null,
    CELULAR              varchar(13) not null,
    DIRECCION            varchar(150) not null,
    EMAIL                varchar(50) not null,
-   primary key (IDCLIENTES)
+   primary key (IDCLIENTE)
 );
 
 /*==============================================================*/
@@ -59,8 +55,8 @@ create table CLIENTES
 /*==============================================================*/
 create table CLIENTESXCOMPRAS
 (
-   IDCLIENTES           integer,
-   IDCOMPRAS            integer
+   IDCLIENTE            integer,
+   IDCOMPRA             integer
 );
 
 /*==============================================================*/
@@ -68,35 +64,25 @@ create table CLIENTESXCOMPRAS
 /*==============================================================*/
 create table COMPRAS
 (
-   IDCOMPRAS            integer not null auto_increment,
+   IDCOMPRA             integer not null auto_increment,
    FECHACOMPRA          date not null,
    HORACOMPRA           time not null,
-   ESTADO               boolean not null,
-   PRECIOFINAL          double not null,
+   ESTADO               bool not null,
+   PRECIOFINAL          double,
    CODIGOCOMPRA         varchar(8),
-   primary key (IDCOMPRAS)
-);
-
-/*==============================================================*/
-/* Table: FACTURAS                                              */
-/*==============================================================*/
-create table FACTURAS
-(
-   IDFACTURAS           integer not null auto_increment,
-   IDCOMPRAS            integer,
-   NUMFACTURA           bigint not null,
-   UNIDADES             int not null,
+   NUMFACTURA           varchar(11),
+   UNIDADES             int,
    DESCUENTO            double,
-   primary key (IDFACTURAS)
+   primary key (IDCOMPRA)
 );
 
 /*==============================================================*/
-/* Table: FACTURASXPRODUCTOS                                    */
+/* Table: COMPRASXPRODUCTOS                                     */
 /*==============================================================*/
-create table FACTURASXPRODUCTOS
+create table COMPRASXPRODUCTOS
 (
-   IDPRODUCTOS          integer,
-   IDFACTURAS           integer
+   IDPRODUCTO           integer,
+   IDCOMPRA             integer
 );
 
 /*==============================================================*/
@@ -104,15 +90,16 @@ create table FACTURASXPRODUCTOS
 /*==============================================================*/
 create table PRODUCTOS
 (
-   IDPRODUCTOS          integer not null auto_increment,
+   IDPRODUCTO           integer not null auto_increment,
+   IDCATEGORIA          integer,
    DESCRIPCIONCORTA     varchar(100) not null,
    FOTOG                longblob not null,
    FOTOP                longblob not null,
    PRECIO               double not null,
-   HABILITADO           boolean not null,
+   HABILITADO           bool not null,
    FOTOSEXTRAS          longblob,
    DESCRIPCIONLARGA     varchar(300),
-   primary key (IDPRODUCTOS)
+   primary key (IDPRODUCTO)
 );
 
 /*==============================================================*/
@@ -120,33 +107,31 @@ create table PRODUCTOS
 /*==============================================================*/
 create table USUARIOS
 (
-   IDUSUARIOS           integer not null auto_increment,
+   IDUSUARIO            integer not null auto_increment,
+   IDCLIENTE            integer,
    USUARIO              varchar(50) not null,
    CONTRASENA           varchar(8) not null,
-   PERMISOS             boolean not null,
-   primary key (IDUSUARIOS)
+   PERMISOS             bool not null,
+   primary key (IDUSUARIO)
 );
 
-alter table CATEGORIAS add constraint FK_CATEGORIASXPRODUCTOS foreign key (IDPRODUCTOS)
-      references PRODUCTOS (IDPRODUCTOS) on delete restrict on update restrict;
+alter table CLIENTES add constraint FK_CIUDADESXCLIENTES foreign key (IDCIUDAD)
+      references CIUDADES (IDCIUDAD) on delete restrict on update restrict;
 
-alter table CIUDADES add constraint FK_CIUDADESXCLIENTES foreign key (IDCLIENTES)
-      references CLIENTES (IDCLIENTES) on delete restrict on update restrict;
+alter table CLIENTESXCOMPRAS add constraint FK_CLIENTES foreign key (IDCLIENTE)
+      references CLIENTES (IDCLIENTE) on delete restrict on update restrict;
 
-alter table CLIENTES add constraint FK_CLIENTESXUSUARIOS foreign key (IDUSUARIOS)
-      references USUARIOS (IDUSUARIOS) on delete restrict on update restrict;
+alter table CLIENTESXCOMPRAS add constraint FK_COMPRAS foreign key (IDCOMPRA)
+      references COMPRAS (IDCOMPRA) on delete restrict on update restrict;
 
-alter table CLIENTESXCOMPRAS add constraint FK_CLIENTES foreign key (IDCLIENTES)
-      references CLIENTES (IDCLIENTES) on delete restrict on update restrict;
+alter table COMPRASXPRODUCTOS add constraint FK_COMPRAS foreign key (IDCOMPRA)
+      references COMPRAS (IDCOMPRA) on delete restrict on update restrict;
 
-alter table CLIENTESXCOMPRAS add constraint FK_COMPRAS foreign key (IDCOMPRAS)
-      references COMPRAS (IDCOMPRAS) on delete restrict on update restrict;
+alter table COMPRASXPRODUCTOS add constraint FK_PRODUCTOS foreign key (IDPRODUCTO)
+      references PRODUCTOS (IDPRODUCTO) on delete restrict on update restrict;
 
-alter table FACTURAS add constraint FK_FACTURASXCOMPRAS foreign key (IDCOMPRAS)
-      references COMPRAS (IDCOMPRAS) on delete restrict on update restrict;
+alter table PRODUCTOS add constraint FK_CATEGORIASXPRODUCTOS foreign key (IDCATEGORIA)
+      references CATEGORIAS (IDCATEGORIA) on delete restrict on update restrict;
 
-alter table FACTURASXPRODUCTOS add constraint FK_FACTURAS foreign key (IDFACTURAS)
-      references FACTURAS (IDFACTURAS) on delete restrict on update restrict;
-
-alter table FACTURASXPRODUCTOS add constraint FK_PRODUCTOS foreign key (IDPRODUCTOS)
-      references PRODUCTOS (IDPRODUCTOS) on delete restrict on update restrict;
+alter table USUARIOS add constraint FK_CLIENTESXUSUARIOS foreign key (IDCLIENTE)
+      references CLIENTES (IDCLIENTE) on delete restrict on update restrict;
