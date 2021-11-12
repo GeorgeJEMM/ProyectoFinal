@@ -69,10 +69,29 @@ require_once('Conexion.php');
     </div>
     <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">Productos 1</div>
-            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Productos 2</div>
-            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Productos 3</div>
-            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Productos 4</div>
+            <?php
+            $categorias = Conexion::Conectar()->query("select * from categorias");
+            $productos = Conexion::Conectar()->query("select * from productos");
+            while($lista=$categorias->fetch_row()){
+                $cont =0;
+                $cont++;
+                //echo $listaP[0]." ".$listaP[1]." ".$listaP[2]." ".$listaP[5]." ".$listaP[6]." ".$listaP[7]." ".$listaP[9]." ".$listaP[9]."</br >";
+                echo "<div class=\"tab-pane fade\" id=\"list-$lista[1]\" role=\"tabpanel\" aria-labelledby=\"list-$lista[1]-list\">";
+
+                        while($listaP=$productos->fetch_row()){
+                            /*if($lista[0]==$listaP[1]){
+                                echo $listaP[0]." ".$listaP[1]." ".$listaP[2]." ".$listaP[5]." ".$listaP[6]." ".$listaP[7]." ".$listaP[9]." ".$listaP[9]."</br >";
+                            }*/
+                            echo $lista[1]." ".$listaP[2]."</br>";
+                        }
+
+                    echo  "</div>";
+            }
+            ?>
+            <!--<div class="tab-pane fade show active" id="list-Alimentos" role="tabpanel" aria-labelledby="list-Alimentos-list">Productos 1</div>
+            <div class="tab-pane fade" id="list-Belleza" role="tabpanel" aria-labelledby="list-Belleza-list">Productos 2</div>
+            <div class="tab-pane fade" id="list-Salud" role="tabpanel" aria-labelledby="list-Salud-list">Productos 3</div>
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Productos 4</div>-->
         </div>
     </div>
 </div>
