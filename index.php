@@ -17,7 +17,7 @@
     <title>Compras</title>
 </head>
 <body style="max-height: 768px; max-width: 824px;">
-<nav class="navbar navbar-expand navbar-light bg-light">
+<!--<nav class="navbar navbar-expand navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Inicio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,9 +42,9 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <!--<li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>
-                </li>-->
+                </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
@@ -52,7 +52,7 @@
             </form>
         </div>
     </div>
-</nav>
+</nav>-->
 
 
 
