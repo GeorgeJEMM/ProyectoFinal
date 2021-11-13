@@ -38,7 +38,7 @@
                     <div class="row justify-content-center ">
                         <div class="text-center">
                             
-                            <button class=" btn1 btn-outline-success close "> Agregar </button>
+                            <button class="btn1 btn-outline-success close agregar" value="<?php echo $productos[9]['IDPRODUCTO']?>"> Agregar </button>
                         </div>
                         <!--div>
                             <a href="/login" class="btn1 btn-outline-success close ">Agregar</a>
@@ -50,4 +50,6 @@
     </div>  
     </section>
  </main>
+ 
+<script type="text/javascript" src="./public/js/agregaralcarro.js"></script>
 <?php include("./plantilla/footer.php") ?>

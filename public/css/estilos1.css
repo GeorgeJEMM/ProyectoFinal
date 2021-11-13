@@ -106,7 +106,7 @@ a.close.disabled {
   pointer-events: none;
 }
 .contaier {
-  width: 100% !important;
+  width: 30% !important;
 }
 .carrito{
   width: 40px;
@@ -142,8 +142,8 @@ a.close.disabled {
   background-position: top;
   background-repeat: repeat;
   max-width: 100%;
-  width: 150px !important;
-  height: 150px !important;
+  width: 100% !important;
+  height: 30% !important;
 }
 .card-body2 {
   border-radius: 0% 4% 4% 0%;
