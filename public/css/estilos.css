@@ -106,13 +106,13 @@ a.close.disabled {
   pointer-events: none;
 }
 .contaier {
-  width: 30% !important;
+  margin-right: 30%;
 }
 .carrito{
   width: 40px;
   height: 40px;
   text-align: center;
-  background-image: url("../images/carrito.png");
+  background-image: url("../images/carritocopia.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top;
@@ -142,8 +142,8 @@ a.close.disabled {
   background-position: top;
   background-repeat: repeat;
   max-width: 100%;
-  width: 100% !important;
-  height: 30% !important;
+  width: 100em !important;
+  height: 22% !important;
 }
 .card-body2 {
   border-radius: 0% 4% 4% 0%;
@@ -155,7 +155,7 @@ a.close.disabled {
   background-position: top;
   background-repeat: repeat;
   max-width: 100% !important;
-  width: 35% !important;
+  width:  33em!important;
   height: auto !important;
   padding: 1rem;
   /*border-radius: 0% 4% 4% 0%;
@@ -239,4 +239,8 @@ input{
 }
 .qty::-webkit-outer-spin-button,.qty::-webkit-inner-spin-button{
   -webkit-appearance:none;
+}
+.row>.col-sm-1{
+  padding-left: 0%;
+  padding-right: 0%;
 }
