@@ -28,11 +28,11 @@
                             <td class="text-left"><?php echo $_SESSION['carrito'][$x]['DESCRIPCIONCORTA'];?></td>
                             <td ><i class="fa fa-dollar colorfuente"></i> <?php echo $_SESSION['carrito'][$x]['PRECIO'];?></td>
                             <td>
-                                <button class=" btn fa fa-minus-circle text-lg-center" @click="resta(index,producto.cantidad)"  ></button>
+                                <button class=" btn fa fa-minus text-lg-center cartminus"></button>
                                     <div class="linea2" v-else>
-                                        <div><?php echo $_SESSION['carrito'][$x]['CANTIDAD'];?></div>
+                                   <p><input type="number" class="qty canti<?php echo $x; ?>" step="1" min="1" max="" name="cantidad" value="<?php echo $_SESSION['carrito'][$x]['CANTIDAD'];?>" size="4" placeholder="" inputmode="numeric"><span>focus fire</span></p> 
                                     </div>
-                                <button class=" btn fa fa-plus-circle" @click="suma(index,producto.cantidad)"></button>
+                                <button class=" btn fa fa-plus cartplus"></button>
                             </td>
                             <td class="text-left"><i class="fa fa-dollar colorfuente"></i>0</td>
                             <td class="">
@@ -64,7 +64,60 @@
             </div>
         </div>
     </div>
+    <div id="conrol">
+        <?php echo $prueba=10;?>
+    </div>
 </section>
+<?php
+    for($x=0;$x<count($_SESSION['carrito']);$x++){
+?>
+<script type="text/javascript">
+    const contar1<?php echo $x;?>=document.querySelector('.canti<?php echo $x; ?>');
+    const contar<?php echo $x;?>=document.querySelector('.canti<?php echo $x; ?>');
+    var cantidad<?php echo $x;?>=0;
+    contar<?php echo $x;?>.addEventListener('keypress',CatidadKey<?php echo $x; ?>);
+    
+    function CatidadInput<?php echo $x; ?>(evObject) {
+        console.log(evObject);
+        document.querySelector('.canti<?php echo $x; ?>').value=null;
+        document.querySelector('.canti<?php echo $x; ?>').value=<?php echo $_SESSION['carrito'][$x]['CANTIDAD'];?>;
+        /*if(parseInt(elCaracter<?php echo $x;?>)>=0&&parseInt(elCaracter<?php echo $x;?>)<=9){
+            var idproducto<?php echo $x;?>= <?php echo $_SESSION['carrito'][$x]['IDPRODUCTO'];?>;
+            console.log(idproducto<?php echo $x;?>);
+            /*console.log("funciona");
+            var request="./peticiones/carrito.php?id="+ idproducto +"&cantidad="+document.querySelector('.canti').value+"&actualizar";
+            console.log(request);
+            fetch(request)
+            .then(function(response){
+                return response.text();
+            });
+        }*/
+        
+    }
+    function CatidadKey<?php echo $x; ?>(evObject) {
+        var elCaracter<?php echo $x;?> = String.fromCharCode(evObject.which);
+        //console.log(evObject.which);
+        if(parseInt(elCaracter<?php echo $x;?>)>=0&&parseInt(elCaracter<?php echo $x;?>)<=9){
+            cantidad<?php echo $x;?>= document.querySelector('.canti<?php echo $x; ?>').value;
+            contar1<?php echo $x;?>.addEventListener('input',CatidadInput<?php echo $x; ?>(cantidad<?php echo $x;?>));
+            console.log(cantidad<?php echo $x;?>);
+            var idproducto<?php echo $x;?>= <?php echo $_SESSION['carrito'][$x]['IDPRODUCTO'];?>;
+            console.log(idproducto<?php echo $x;?>);
+            //document.querySelector('.canti<?php echo $x; ?>').value=null;
+            /*console.log("funciona");
+            var request="./peticiones/carrito.php?id="+ idproducto +"&cantidad="+document.querySelector('.canti').value+"&actualizar";
+            console.log(request);
+            fetch(request)
+            .then(function(response){
+                return response.text();
+            });*/
+        }
+        
+    }
+</script>
+<?php
+    }
+?>
 <?php
     include './plantilla/footer.php'
 ?>
