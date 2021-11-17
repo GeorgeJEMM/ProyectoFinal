@@ -65,7 +65,7 @@
         <div class="modal fade" tabindex="-1" id="modal1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content ">
-                    <Confirmar :sub="parseFloat(subtot).toFixed(2)"/>
+                    hola
                 </div>
             </div>
         </div>
@@ -104,7 +104,8 @@ if(isset($_SESSION['carrito'])){
                 if(parseInt(texto[1])>=0){
                     location.reload();
                     document.querySelector('.circulo').innerHTML=texto[1];
-                    document.querySelector('.total<?php echo $x; ?>').innerHTML='<i class="fa fa-dollar colorfuente "></i> '+(<?php echo $_SESSION['carrito'][$x]['PRECIO'];?>*texto[0]);
+                    //var total=parseFloat(parseInt(<?php echo $_SESSION['carrito'][$x]['PRECIO'];?>)*parseInt(texto[0])).toFixed(2);
+                    //document.querySelector('.total<?php echo $x; ?>').innerHTML='<i class="fa fa-dollar colorfuente "></i> '+total;
                     subtotal=subtotal+(<?php echo $_SESSION['carrito'][$x]['PRECIO'];?>*texto[0]);
                     console.log(texto[1]);
                     console.log((<?php echo $_SESSION['carrito'][$x]['PRECIO'];?>*texto[0]));

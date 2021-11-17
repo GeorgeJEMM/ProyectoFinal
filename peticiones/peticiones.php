@@ -76,25 +76,22 @@ class PeticionesCarrito
         }
         else{
             if(isset($_GET['actualizar'])&&$_GET['cantidad']==0){
-                unset($_SESSION['carrito'][$_GET['actualizar']]);
-                if(count($_SESSION['carrito'])==0){
+                if(isset($_SESSION['carrito'])){
+                    unset($_SESSION['carrito'][$_GET['actualizar']]);
                     session_destroy();
-                    echo (json_encode(array(
-                        0=> 0,
-                        1=>PeticionesCarrito::Contar()
-        )           )      );  
                 }
-                else{
-                    $_SESSION['carrito']=array_values($_SESSION['carrito']);
-                    echo (json_encode(array(
-                                0=> $_SESSION['carrito'][$index]['CANTIDAD'],
-                                1=>PeticionesCarrito::Contar()
-                )           )      );             
-                    }
-                //print_r($_SESSION['carrito']);
+                echo (json_encode(array(
+                                        0=> 0,
+                                        1=>0
+                        )           )      );  
             }
-            else
-                echo "No es posible ingresar ese valor al carrito";
+            else{
+                $_SESSION['carrito']=array_values($_SESSION['carrito']);
+                echo (json_encode(array(
+                                        0=> $_SESSION['carrito'][$index]['CANTIDAD'],
+                                        1=>PeticionesCarrito::Contar()
+                        )           )      );             
+            } 
         }
     }
     public function Contar(){
