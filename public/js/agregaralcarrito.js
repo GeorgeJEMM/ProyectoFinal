@@ -45,8 +45,8 @@ function cantidadsumar(){
     //cantidad.value=6;
 }
 function cantidadrestarcart(idproducto,index,precio){
-    var request="./peticiones/carrito.php?id="+ idproducto+"&cantidad="+1+"&actualizar&restar";
     var id='.canti'+index;
+    var request="./peticiones/carrito.php?id="+ idproducto+"&cantidad="+parseInt(document.querySelector(id).value)+"&actualizar&restar";
     var clase='.total'+index;
     console.log(request);
     fetch(request)
@@ -57,15 +57,15 @@ function cantidadrestarcart(idproducto,index,precio){
         if(texto.length<5){
             document.querySelector('.circulo').innerHTML=texto[1];
             document.querySelector(id).value=texto[0];
-            document.querySelector(clase).innerHTML='<i class="fa fa-dollar colorfuente "></i> '+(precio*texto[0]);
-            location.reload();
+            document.querySelector(clase).innerHTML='<i class="fa fa-dollar colorfuente "></i> '+parseFloat(precio*texto[0]).toFixed(2);
         }
+        location.reload();
         console.log(texto[0]);
     });
 }
 function cantidadsumarcart(idproducto,index,precio){
-    var request="./peticiones/carrito.php?id="+ idproducto+"&cantidad="+1+"&actualizar&sumar";
     var id='.canti'+index;
+    var request="./peticiones/carrito.php?id="+ idproducto+"&cantidad="+parseInt(document.querySelector(id).value)+"&actualizar&sumar";
     var clase='.total'+index;
     console.log(request);
     fetch(request)
@@ -76,7 +76,7 @@ function cantidadsumarcart(idproducto,index,precio){
         if(texto.length<5){
             document.querySelector('.circulo').innerHTML=texto[1];
             document.querySelector(id).value=texto[0];
-            document.querySelector(clase).innerHTML='<i class="fa fa-dollar colorfuente "></i> '+(precio*texto[0]);
+            document.querySelector(clase).innerHTML='<i class="fa fa-dollar colorfuente "></i> '+parseFloat(precio*texto[0]).toFixed(2);
             
             location.reload();
         }
