@@ -1,3 +1,9 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0;
+  box-sizing: border-box;
+}
 article,
 aside,
 figcaption,
@@ -35,23 +41,23 @@ section {
           user-select: none !important;
 }
 .btn1 {
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  cursor: pointer;
+  display: inline-block!important;
+  font-weight: 400!important;
+  color: #212529!important;
+  text-align: center!important;
+  vertical-align: middle!important;
+  -webkit-user-select: none!important;
+     -moz-user-select: none!important;
+      -ms-user-select: none!important;
+          user-select: none!important;
+  background-color: transparent!important;
+  border: 1px solid transparent!important;
+  padding: 0.375rem 0.75rem!important;
+  font-size: 0.9rem!important;
+  line-height: 1.6!important;
+  border-radius: 0.25rem!important;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out!important;
+  cursor: pointer!important;
 }
 .btn-outline-success {
   color: #38c172;
@@ -203,10 +209,7 @@ a.close.disabled {
   border-color:#000
 }
 .m5{
-  margin-top: 4%;
-}
-.m{
-  margin-bottom: -17%;
+  margin: 4%;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -243,4 +246,145 @@ input{
 .row>.col-sm-1{
   padding-left: 0%;
   padding-right: 0%;
+}
+#container {
+  width: 100%;
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+@media(min-width:700px) {
+  .footer-content {
+      display: flex;
+  }
+}
+
+@media(max-width:700px) {
+  .footer-content {
+      display: block;
+  }
+}
+
+.footer-section {
+  flex: 1;
+  padding: 25px;
+}
+
+.footer-classic .footer-content .about h1, .footer-classic .footer-content .footer-section p {
+  color: white;
+  text-align: justify;
+}
+
+  .footer-classic .footer-content .about h1 sup {
+      color: powderblue;
+      font-size: 0.5em;
+  }
+
+.footer-classic .footer-content .footer-section p {
+  font-family: Tahoma;
+  padding-top: 10px;
+  font-size: 1em;
+}
+
+.footer-classic .footer-content .footer-section h1 span {
+  color: powderblue;
+  font-size: 0.5em;
+}
+
+
+.footer-classic {
+  padding: 30px 30px 5px 30px;
+  background: #404044;
+  color: #aab2b9;
+  font-size: 16px;
+  flex-wrap: wrap;
+}
+
+.contact div, .links a {
+  display: block;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: #aab2b9;
+}
+
+.icon i {
+  width: 20px;
+  text-align: left;
+  margin-right: 20px;
+}
+
+.contact p, .links p {
+  font-size: 1.5em;
+  font-family: "Poppins";
+  color: white;
+  margin-bottom: 25px;
+}
+
+h4 {
+  padding-top: 20px;
+}
+
+.fa-phone, .fa-envelope-o {
+  color: powderblue;
+}
+
+.fa-facebook {
+  color: blue;
+}
+
+.fa-instagram {
+  color: hotpink;
+}
+
+.fa-twitter {
+  color: deepskyblue;
+}
+
+
+div.linea{
+  display: inline-flex;
+  width: 115px;
+}
+
+.btn-outline-danger {
+  color: #e3342f !important;
+  border-color: #e3342f!important;
+}
+
+.btn-outline-danger:hover {
+  color: #fff!important;
+  background-color: #e3342f!important;
+  border-color: #e3342f!important;
+}
+
+.btn-outline-danger:focus,
+.btn-outline-danger.focus {
+  box-shadow: 0 0 0 0.2rem rgba(227, 52, 47, 0.5)!important;
+  outline: 0!important;
+}
+
+.btn-outline-danger.disabled,
+.btn-outline-danger:disabled {
+  color: #e3342f!important;
+  background-color: transparent!important;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled):active,
+.btn-outline-danger:not(:disabled):not(.disabled).active,
+.show > .btn-outline-danger.dropdown-toggle {
+  color: #fff!important;
+  background-color: #e3342f!important;
+  border-color: #e3342f!important;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled):active:focus,
+.btn-outline-danger:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-danger.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(227, 52, 47, 0.5)!important;
+  outline: 0!important;
 }

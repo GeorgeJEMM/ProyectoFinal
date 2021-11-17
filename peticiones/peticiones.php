@@ -32,8 +32,18 @@ class PeticionesCarrito
                         $index=$x;
                 }
                 if($agregado[$index]['IDPRODUCTO']==$_GET['id']){
-                    $pruen=$agregado[$index]['CANTIDAD']+$_GET['cantidad'];
-                    $agregado[$index]['CANTIDAD']=$agregado[$index]['CANTIDAD']+$_GET['cantidad'];
+                    if(isset($_GET['actualizar'])){
+                        if(isset($_GET['sumar'])){
+                            $agregado[$index]['CANTIDAD']=$agregado[$index]['CANTIDAD']+1;
+                        }
+                        else
+                            if(isset($_GET['restar']))
+                                $agregado[$index]['CANTIDAD']=$agregado[$index]['CANTIDAD']-1;
+                            else
+                                $agregado[$index]['CANTIDAD']=$_GET['cantidad'];
+                    }
+                    else
+                        $agregado[$index]['CANTIDAD']=$agregado[$index]['CANTIDAD']+$_GET['cantidad'];
                     $_SESSION['carrito']=$agregado;
                 }
                 else{
@@ -57,11 +67,34 @@ class PeticionesCarrito
                     'CANTIDAD'=>$_GET['cantidad'],
                 );
                 $_SESSION['carrito']=$arreglo;
+                $index=0;
             }
-            PeticionesCarrito::Contar();
+            echo (json_encode(array(
+                                0=> $_SESSION['carrito'][$index]['CANTIDAD'],
+                                1=>PeticionesCarrito::Contar()
+                 )           )      );
         }
         else{
-            echo "No es posible ingresar ese valor al carrito";
+            if(isset($_GET['actualizar'])&&$_GET['cantidad']==0){
+                unset($_SESSION['carrito'][$_GET['actualizar']]);
+                if(count($_SESSION['carrito'])==0){
+                    session_destroy();
+                    echo (json_encode(array(
+                        0=> 0,
+                        1=>PeticionesCarrito::Contar()
+        )           )      );  
+                }
+                else{
+                    $_SESSION['carrito']=array_values($_SESSION['carrito']);
+                    echo (json_encode(array(
+                                0=> $_SESSION['carrito'][$index]['CANTIDAD'],
+                                1=>PeticionesCarrito::Contar()
+                )           )      );             
+                    }
+                //print_r($_SESSION['carrito']);
+            }
+            else
+                echo "No es posible ingresar ese valor al carrito";
         }
     }
     public function Contar(){
@@ -72,7 +105,7 @@ class PeticionesCarrito
             for($x=0;$x<count($_SESSION['carrito']);$x++)
                 $totalprod=$totalprod+$_SESSION['carrito'][$x]['CANTIDAD'];
         }
-        echo($totalprod);
+        return $totalprod;
     }
     public function borrarcarrito($accion){
         session_start();

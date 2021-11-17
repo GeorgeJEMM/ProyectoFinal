@@ -3,7 +3,6 @@ fetch("./peticiones/carrito.php?contar=canti")
         return response.text();
     })
     .then(function(texto){
-        conte=texto
-        document.querySelector('.circulo').innerHTML=conte;
+        document.querySelector('.circulo').innerHTML=texto;
         console.log(texto);
     });
