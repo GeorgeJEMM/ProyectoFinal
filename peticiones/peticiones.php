@@ -78,7 +78,9 @@ class PeticionesCarrito
             if(isset($_GET['actualizar'])&&$_GET['cantidad']==0){
                 if(isset($_SESSION['carrito'])){
                     unset($_SESSION['carrito'][$_GET['actualizar']]);
-                    session_destroy();
+                    $_SESSION['carrito']=array_values($_SESSION['carrito']);
+                    if(count($_SESSION['carrito'])==0)
+                        session_destroy();
                 }
                 echo (json_encode(array(
                                         0=> 0,

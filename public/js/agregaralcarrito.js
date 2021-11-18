@@ -58,8 +58,8 @@ function cantidadrestarcart(idproducto,index,precio){
             document.querySelector('.circulo').innerHTML=texto[1];
             document.querySelector(id).value=texto[0];
             document.querySelector(clase).innerHTML='<i class="fa fa-dollar colorfuente "></i> '+parseFloat(precio*texto[0]).toFixed(2);
+            location.reload();
         }
-        location.reload();
         console.log(texto[0]);
     });
 }
@@ -94,7 +94,8 @@ function agregaralcarrito(){
     .then(function(texto){
         if(texto.length<5){
             document.querySelector('.circulo').innerHTML=texto[1];
-            document.querySelector('.canti1').value=texto[0];
+            if(document.querySelector('.canti1')!=null)
+                document.querySelector('.canti1').value=texto[0];
         }
         console.log(texto[0]);
     });
