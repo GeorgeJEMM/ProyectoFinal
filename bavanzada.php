@@ -62,7 +62,7 @@
                         <form action="" method="GET">
                             <div class="row">
                                 <div class="col-md-12">
-                                <h6>Busqueda</h6>
+                                <h6>Palabra a buscar</h6>
                                     <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }else{echo "Busqueda";} ?>" class="form-control">  <br>                  
                                 </div>
                                 <div class="col-md-4">
@@ -73,13 +73,21 @@
                                     <label for="">Maximo</label>
                                     <input type="text" name="max_precio" value="<?php if(isset($_GET['max_precio'])){echo $_GET['max_precio']; }else{echo "10000";} ?>" class="form-control">
                                 </div>
+                                <div class="col-md-12">
+                                    <h6>Orden</h6>
+                                    <select name="sort_cat" class="form-control">
+                                        <option value="">--Seleccione una opción--</option>
+                                        <option value="menor-mayor" <?php if(isset($_GET['sort_cat']) && $_GET['sort_cat'] == "menor-mayor") { echo "selected"; } ?> > PRECIO - Menor - Mayor</option>
+                                        <option value="mayor-menor" <?php if(isset($_GET['sort_cat']) && $_GET['sort_cat'] == "mayor-menor") { echo "selected"; } ?> > PRECIO - Mayor - Menor</option>
+                                        <option value="A-Z" <?php if(isset($_GET['sort_cat']) && $_GET['sort_cat'] == "A-Z") { echo "selected"; } ?> > A-Z</option>
+                                        <option value="Z-A" <?php if(isset($_GET['sort_cat']) && $_GET['sort_cat'] == "Z-A") { echo "selected"; } ?> > Z-A</option>
+                                    </select>
+                                </div> 
                                 <div class="col-md-4"><br/>
-                                    <button type="submit" class="btn btn-primary px-4">OK</button>
+                                    <button type="submit" class="btn btn-primary px-4">BUSCAR</button>
                                 </div>
-                                
                             </div>
                         </form>
-
                     </div>
                     </div>
                 </form>
@@ -88,6 +96,8 @@
             <div class="col-md-9 mt-3">
                 <div class="card ">
                     <div class="card-body row">
+                        <!-- Orden -->
+                        <!-- Busqueda Filtros -->
                         <?php
                         
                             if(isset($_GET['categ']))
@@ -97,9 +107,20 @@
                                 $minprecio = $_GET['min_precio'];
                                 $maxprecio = $_GET['max_precio'];
                                 $search = $_GET['search'];
+                                $sort_option = "";
+                                if($_GET['sort_cat'] == "menor-mayor"){
+                                    $sort_option = "PRECIO ASC";
+                                }elseif($_GET['sort_cat'] == "mayor-menor"){
+                                    $sort_option = "PRECIO DESC";
+                                }elseif($_GET['sort_cat'] == "A-Z"){
+                                    $sort_option = "DESCRIPCIONCORTA ASC";
+                                }elseif($_GET['sort_cat'] == "Z-A"){
+                                    $sort_option = "DESCRIPCIONCORTA DESC";
+                                }
+                                
                                 foreach($categoriasArr as $colcateg)
                                 {
-                                    $productos = "SELECT * FROM productos WHERE IDCATEGORIA IN ($colcateg) AND PRECIO BETWEEN $minprecio AND $maxprecio AND DESCRIPCIONCORTA LIKE '%$search%'";
+                                    $productos = "SELECT * FROM productos WHERE IDCATEGORIA IN ($colcateg) AND PRECIO BETWEEN $minprecio AND $maxprecio AND DESCRIPCIONCORTA LIKE '%$search%' ORDER BY $sort_option";
                                     $productos_run = mysqli_query($con, $productos);
                                     if(mysqli_num_rows($productos_run) > 0)
                                     {
@@ -121,27 +142,46 @@
                                 $minprecio = $_GET['min_precio'];
                                 $maxprecio = $_GET['max_precio'];
                                 $search = $_GET['search'];
+                                $sort_option = "";
+                                if($_GET['sort_cat'] == "menor-mayor"){
+                                    $sort_option = "PRECIO ASC";
+                                }elseif($_GET['sort_cat'] == "mayor-menor"){
+                                    $sort_option = "PRECIO DESC";
+                                }elseif($_GET['sort_cat'] == "A-Z"){
+                                    $sort_option = "DESCRIPCIONCORTA ASC";
+                                }elseif($_GET['sort_cat'] == "Z-A"){
+                                    $sort_option = "DESCRIPCIONCORTA DESC";
+                                }
                                 
-                                    $productos = "SELECT * FROM productos WHERE DESCRIPCIONCORTA LIKE '%$search%'AND PRECIO BETWEEN $minprecio AND $maxprecio";
-                                    $productos_run = mysqli_query($con, $productos);
-                                    if(mysqli_num_rows($productos_run) > 0)
-                                    {
-                                        foreach($productos_run as $col) :
-                                            ?>
-                                                <div class="col-md-4 mt-3">
-                                                    <div class="border p-2">
-                                                        <h6><?= $col['DESCRIPCIONCORTA']; ?></h6>
-                                                        <h6>PRECIO: <?php echo $col['PRECIO']; ?></h6>
-                                                    </div>
+                                $productos = "SELECT * FROM productos WHERE DESCRIPCIONCORTA LIKE '%$search%'AND PRECIO BETWEEN $minprecio AND $maxprecio ORDER BY $sort_option";
+                                $productos_run = mysqli_query($con, $productos);
+                                if(mysqli_num_rows($productos_run) > 0)
+                                {
+                                    foreach($productos_run as $col) :
+                                        ?>
+                                            <div class="col-md-4 mt-3">
+                                                <div class="border p-2">
+                                                    <h6><?= $col['DESCRIPCIONCORTA']; ?></h6>
+                                                    <h6>PRECIO: <?php echo $col['PRECIO']; ?></h6>
                                                 </div>
-                                            <?php
-                                        endforeach;
-                                    }
+                                            </div>
+                                        <?php
+                                    endforeach;
+                                }
                             }
                             else
-                            {
-                                
-                                $productos = "SELECT * FROM productos";
+                            {    
+                                $sort_option = "";
+                                if($_GET['sort_cat'] == "menor-mayor"){
+                                    $sort_option = "PRECIO ASC";
+                                }elseif($_GET['sort_cat'] == "mayor-menor"){
+                                    $sort_option = "PRECIO DESC";
+                                }elseif($_GET['sort_cat'] == "A-Z"){
+                                    $sort_option = "DESCRIPCIONCORTA ASC";
+                                }elseif($_GET['sort_cat'] == "Z-A"){
+                                    $sort_option = "DESCRIPCIONCORTA DESC";
+                                }
+                                $productos = "SELECT * FROM productos ORDER BY $sort_option";
                                 $productos_run = mysqli_query($con, $productos);
                                 if(mysqli_num_rows($productos_run) > 0)
                                 {
