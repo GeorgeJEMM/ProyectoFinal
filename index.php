@@ -1,6 +1,6 @@
 
 <?php
-include("./plantilla/encabezado.php");
+//include("./plantilla/encabezado.php");
 require_once('Conexion.php');
 ?>
 
@@ -17,7 +17,7 @@ require_once('Conexion.php');
     <title>Compras</title>
 </head>
 <body style="max-height: 768px; max-width: 824px;">
-<!--<nav class="navbar navbar-expand navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php">Inicio</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@ require_once('Conexion.php');
             </form>
         </div>
     </div>
-</nav>-->
+</nav>
 <div class="row">
     <div class="col-4">
         <div class="list-group" id="list-tab" role="tablist">
@@ -88,22 +88,40 @@ require_once('Conexion.php');
                                                                             categorias.NOMBRECATEGORIA, 
                                                                             productos.DESCRIPCIONCORTA, 
                                                                             productos.PRECIO, 
-                                                                            productos.IDPRODUCTO
+                                                                            productos.IDPRODUCTO,
+                                                                            productos.FOTOP,        
+                                                                            productos.DESCRIPCIONLARGA       
                                                                          FROM productos INNER JOIN categorias 
                                                                          ON categorias.IDCATEGORIA=productos.IDCATEGORIA
                                                                          where categorias.NOMBRECATEGORIA='$NomCat'
                                                                          ORDER BY productos.DESCRIPCIONCORTA");
                     while($listaPxC=$categoriasxproductos->fetch_row()){
-                        echo $listaPxC[2]."<br>";
+                        //echo $listaPxC[2]."<br>";
+                       echo "<div class=\"card\" style=\"width: 18rem;\">";
+                       echo "<img src=\"...\" class=\"card-img-top\" alt=\"...\">";
+                       echo "<div class=\"card-body\">";
+                       echo "<h5 class=\"card-title\">$listaPxC[2]</h5>";
+                       echo "<p class=\"card-text\">$listaPxC[6]</p>";
+                       echo "<a href=\"#\" class=\"btn btn-primary\">Ver Producto</a>";
+                       echo "</div>";
+                       echo "</div>";
+
+
                     }
 
                     echo  "</div>";
                 }
                 ?>
-                <div class="tab-pane fade show active" id="list-Alimentos" role="tabpanel" aria-labelledby="list-Alimentos-list">Productos 1</div>
-                <div class="tab-pane fade" id="list-Belleza" role="tabpanel" aria-labelledby="list-Belleza-list">Productos 2</div>
-                <div class="tab-pane fade" id="list-Salud" role="tabpanel" aria-labelledby="list-Salud-list">Productos 3</div>
-                <div class="tab-pane fade" id="list-Otros" role="tabpanel" aria-labelledby="list-Otros-list">Productos 4</div>
+                <div class="tab-pane fade show active" id="list-Alimentos" role="tabpanel" aria-labelledby="list-Alimentos-list">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div></div>
+
             </div>
         </div>
     </div>
