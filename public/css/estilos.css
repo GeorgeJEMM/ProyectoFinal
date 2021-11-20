@@ -367,7 +367,7 @@ legend {
   font-size: 1.5rem;
   line-height: inherit;
   color: inherit;
-  
+
 }
 
 progress {
@@ -754,7 +754,7 @@ form{
 .col-1 {
   padding-right: 15px;
   padding-left: 15px;
-  
+
 }
 
 .col {
@@ -3754,14 +3754,14 @@ input[type=button].btn-block {
   color: rgb(240,240,235 );
   text-decoration: none;
   background-color:#006ca8;
-  
+
 }
 .dropdown-item1:hover,
 .dropdown-item1:focus {
   color: rgb(240,240,235 );
   text-decoration: none;
   background-color:#006ca8;
-  
+
 }
 .dropdown-item.active,
 .dropdown-item:active {
@@ -5191,7 +5191,7 @@ header{
   background-repeat: no-repeat;
   width:399px;
   height: 200px;
-  
+
 }
 
 .textoh4{
@@ -6661,7 +6661,7 @@ input[type=number]::-webkit-outer-spin-button {
   letter-spacing: normal;
   word-break: normal;
   word-spacing: normal;
-  
+
   line-break: auto;
   font-size: 0.7875rem;
   word-wrap: break-word;
@@ -6786,7 +6786,7 @@ input[type=number]::-webkit-outer-spin-button {
   letter-spacing: normal;
   word-break: normal;
   word-spacing: normal;
-  
+
   line-break: auto;
   font-size: 0.7875rem;
   word-wrap: break-word;
@@ -8557,7 +8557,7 @@ button.bg-dark:focus {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  
+
   border: 0;
 }
 
@@ -8568,7 +8568,7 @@ button.bg-dark:focus {
   height: auto;
   overflow: visible;
   clip: auto;
-  
+
 }
 
 .shadow-sm {
@@ -8650,7 +8650,7 @@ button.bg-dark:focus {
 .vh-100 {
   height: 100vh !important;
 }
- 
+
 .m{
   margin-bottom: -17%;
 }
@@ -10864,7 +10864,7 @@ button.bg-dark:focus {
 .text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
 }
 
 .text-left {
@@ -11228,7 +11228,7 @@ footer{
   font-style: italic;
   color: rgb(240,240,235 );
 }
-.card-footer .footer-content .about h1, .card-footer .footer-content .footer-section p, 
+.card-footer .footer-content .about h1, .card-footer .footer-content .footer-section p,
 .card-footer .footer-content .footer-section h4 {
   color: rgb(240,240,235 );
   text-align: justify;
@@ -11267,7 +11267,7 @@ a{
   text-decoration: none;
   font-family: 'Roboto';
   color:rgb(240,240,235 );
-} 
+}
 
 .icon i {
   width: 20px;
@@ -11431,7 +11431,7 @@ a.close.disabled {
   width: 12.66666667% !important;
 }
 .card-body {
-  
+
   border-radius: 0% 4% 4% 0%;
   border-bottom: 1px solid rgba(20, 16, 16, 0.3);
   flex:0 !important;
@@ -11473,7 +11473,7 @@ a.close.disabled {
 }
 .fa {
   display: inline-block;
-  
+
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
