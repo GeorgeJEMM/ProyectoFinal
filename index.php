@@ -1,7 +1,7 @@
 
 <?php
-    include("./plantilla/encabezado.php");
-    require_once('Conexion.php');
+include("./plantilla/encabezado.php");
+require_once('Conexion.php');
 ?>
 
 <!doctype html>
@@ -53,50 +53,71 @@
         </div>
     </div>
 </nav>-->
-
-
-
 <div class="row">
     <div class="col-4">
         <div class="list-group" id="list-tab" role="tablist">
             <?php
             $categorias = Conexion::Conectar()->query("select * from categorias");
+            $IdCat="";
             while($lista=$categorias->fetch_row()){
                 //echo $lista[0]." ".$lista[1]."</br >";
-                if ($lista[0] == '1')
+                if ($lista[0] == '1'){
                     echo "<a class=\"list-group-item list-group-item-action active\" id=\"list-$lista[1]-list\" data-bs-toggle=\"list\" href=\"#list-$lista[1]\" role=\"tab\" aria-controls=\"list-$lista[1]\">$lista[1]</a>";
+                    $idCat=$lista[1];
+                    //print_r($idCat);
+                }
                 else
                     echo "<a class=\"list-group-item list-group-item-action\" id=\"list-$lista[1]-list\" data-bs-toggle=\"list\" href=\"#list-$lista[1]\" role=\"tab\" aria-controls=\"list-$lista[1]\">$lista[1]</a>";
+                  $listaCat[] = $lista[1];
             }
             ?>
         </div>
     </div>
     <div class="col-8">
         <div class="tab-content" id="nav-tabContent">
-            <?php
-            $categorias = Conexion::Conectar()->query("select * from categorias");
-            $productos = Conexion::Conectar()->query("select * from productos");
-            while($lista=$categorias->fetch_row()){
-                $cont =0;
-                $cont++;
-                //echo $listaP[0]." ".$listaP[1]." ".$listaP[2]." ".$listaP[5]." ".$listaP[6]." ".$listaP[7]." ".$listaP[9]." ".$listaP[9]."</br >";
-                echo "<div class=\"tab-pane fade\" id=\"list-$lista[1]\" role=\"tabpanel\" aria-labelledby=\"list-$lista[1]-list\">";
+            <div class="tab-content" id="nav-tabContent">
+                <?php
+                $categorias = Conexion::Conectar()->query("select * from categorias");
 
-                        while($listaP=$productos->fetch_row()){
-                            /*if($lista[0]==$listaP[1]){
-                                echo $listaP[0]." ".$listaP[1]." ".$listaP[2]." ".$listaP[5]." ".$listaP[6]." ".$listaP[7]." ".$listaP[9]." ".$listaP[9]."</br >";
-                            }*/
-                            echo $lista[1]." ".$listaP[2]."</br>";
-                        }
+                while($listaP=$categorias->fetch_row()){
+                    echo "<div class=\"tab-pane fade\" id=\"list-$listaP[1]\" role=\"tabpanel\" aria-labelledby=\"list-$listaP[1]-list\">";
+
+                        //echo "Productos: ".$listaP[1];
+                        $NomCat=$listaP[1];
+                    $categoriasxproductos = Conexion::Conectar()->query("SELECT categorias.IDCATEGORIA,
+                                                                            categorias.NOMBRECATEGORIA, 
+                                                                            productos.DESCRIPCIONCORTA, 
+                                                                            productos.PRECIO, 
+                                                                            productos.IDPRODUCTO
+                                                                         FROM productos INNER JOIN categorias 
+                                                                         ON categorias.IDCATEGORIA=productos.IDCATEGORIA
+                                                                         where categorias.NOMBRECATEGORIA='$NomCat'
+                                                                         ORDER BY productos.DESCRIPCIONCORTA");
+                    while($listaPxC=$categoriasxproductos->fetch_row()){
+                        echo $listaPxC[2]."<br>";
+                    }
 
                     echo  "</div>";
-            }
-            ?>
-            <!--<div class="tab-pane fade show active" id="list-Alimentos" role="tabpanel" aria-labelledby="list-Alimentos-list">Productos 1</div>
-            <div class="tab-pane fade" id="list-Belleza" role="tabpanel" aria-labelledby="list-Belleza-list">Productos 2</div>
-            <div class="tab-pane fade" id="list-Salud" role="tabpanel" aria-labelledby="list-Salud-list">Productos 3</div>
-            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Productos 4</div>-->
+                }
+                ?>
+                <div class="tab-pane fade show active" id="list-Alimentos" role="tabpanel" aria-labelledby="list-Alimentos-list">Productos 1</div>
+                <div class="tab-pane fade" id="list-Belleza" role="tabpanel" aria-labelledby="list-Belleza-list">Productos 2</div>
+                <div class="tab-pane fade" id="list-Salud" role="tabpanel" aria-labelledby="list-Salud-list">Productos 3</div>
+                <div class="tab-pane fade" id="list-Otros" role="tabpanel" aria-labelledby="list-Otros-list">Productos 4</div>
+            </div>
         </div>
     </div>
 </div>
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+</body>
 <?php include("./plantilla/footer.php") ?>
+</html>
