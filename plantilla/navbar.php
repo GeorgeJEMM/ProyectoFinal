@@ -14,7 +14,7 @@
     
 
     <!-- Required meta tags -->
-    <link rel="stylesheet" href="./public/css/estilos.css">
+    <link rel="stylesheet" href="./public/css/estilosCarrito.css">
     <link rel="stylesheet" href="./public/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
   </style>
@@ -68,7 +68,7 @@
                     </ul>
                 </div>
                 
-                <div class="contaier justify-content-center">
+                <div class="container justify-content-center">
                         <a href="./vercarrito.php">
                             <div class="circulo text-center"></div>
                             <div class="carrito"></div>
