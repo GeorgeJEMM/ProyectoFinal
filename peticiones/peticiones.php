@@ -96,7 +96,7 @@ class PeticionesCarrito
             } 
         }
     }
-    public function Contar(){
+    public static function Contar(){
         if(isset($_GET['contar']))
             session_start(['name'=>'Carrito']);
         $totalprod=0;
