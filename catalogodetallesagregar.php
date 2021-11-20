@@ -1,6 +1,6 @@
 <?php
     include("Conexion.php");
-    include("./plantilla/encabezado.php");
+    include("./plantilla/navbar.php");
     //$productos=Mostrar("productos");
     $productos= Conexion::Conectar()->query("select * from productos where IDPRODUCTO=10");
     /*foreach ($productos as $key => $value) :

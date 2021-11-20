@@ -63,7 +63,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                 <h6>Palabra a buscar</h6>
-                                    <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; }else{echo "Busqueda";} ?>" class="form-control">  <br>                  
+                                    <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" class="form-control" placeholder="Buscar palabra">  <br>                  
                                 </div>
                                 <div class="col-md-4">
                                     <label for="">Minimo</label>
@@ -120,7 +120,7 @@
                                 
                                 foreach($categoriasArr as $colcateg)
                                 {
-                                    $productos = "SELECT * FROM productos WHERE IDCATEGORIA IN ($colcateg) AND PRECIO BETWEEN $minprecio AND $maxprecio AND DESCRIPCIONCORTA LIKE '%$search%' ORDER BY $sort_option";
+                                    $productos = "SELECT * FROM productos WHERE IDCATEGORIA IN ($colcateg) AND PRECIO BETWEEN $minprecio AND $maxprecio";
                                     $productos_run = mysqli_query($con, $productos);
                                     if(mysqli_num_rows($productos_run) > 0)
                                     {
@@ -170,35 +170,37 @@
                                 }
                             }
                             else
-                            {    
-                                $sort_option = "";
-                                if($_GET['sort_cat'] == "menor-mayor"){
-                                    $sort_option = "PRECIO ASC";
-                                }elseif($_GET['sort_cat'] == "mayor-menor"){
-                                    $sort_option = "PRECIO DESC";
-                                }elseif($_GET['sort_cat'] == "A-Z"){
-                                    $sort_option = "DESCRIPCIONCORTA ASC";
-                                }elseif($_GET['sort_cat'] == "Z-A"){
-                                    $sort_option = "DESCRIPCIONCORTA DESC";
-                                }
-                                $productos = "SELECT * FROM productos ORDER BY $sort_option";
-                                $productos_run = mysqli_query($con, $productos);
-                                if(mysqli_num_rows($productos_run) > 0)
-                                {
-                                    foreach($productos_run as $proditems) :
-                                        ?>
-                                            <div class="col-md-4 mt-3">
-                                                <div class="border p-2">
-                                                    <h6><?= $proditems['DESCRIPCIONCORTA']; ?></h6>
-                                                    <h6>PRECIO: <?php echo $proditems['PRECIO']; ?></h6>
+                            {   if(isset($_GET['sort_cat'])) {
+                                    $sort_option = "";
+                                    if($_GET['sort_cat'] == "menor-mayor"){
+                                        $sort_option = "PRECIO ASC";
+                                    }elseif($_GET['sort_cat'] == "mayor-menor"){
+                                        $sort_option = "PRECIO DESC";
+                                    }elseif($_GET['sort_cat'] == "A-Z"){
+                                        $sort_option = "DESCRIPCIONCORTA ASC";
+                                    }elseif($_GET['sort_cat'] == "Z-A"){
+                                        $sort_option = "DESCRIPCIONCORTA DESC";
+                                    }
+                                
+                                    $productos = "SELECT * FROM productos ORDER BY $sort_option";
+                                    $productos_run = mysqli_query($con, $productos);
+                                    if(mysqli_num_rows($productos_run) > 0)
+                                    {
+                                        foreach($productos_run as $proditems) :
+                                            ?>
+                                                <div class="col-md-4 mt-3">
+                                                    <div class="border p-2">
+                                                        <h6><?= $proditems['DESCRIPCIONCORTA']; ?></h6>
+                                                        <h6>PRECIO: <?php echo $proditems['PRECIO']; ?></h6>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        <?php
-                                    endforeach;
-                                }
-                                else
-                                {
-                                    echo "No se encuentran registros";
+                                            <?php
+                                        endforeach;
+                                    }
+                                    else
+                                    {
+                                        echo "No se encuentran registros";
+                                    }
                                 }
                             }
                         ?>

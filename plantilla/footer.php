@@ -1,204 +1,239 @@
+</main>
+    <footer class="footer-classic">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <div>
+                <h1>
+                    <sup>info</sup>Mental
+                </h1>
+                <p>
+                    Página web universitario que trata de ayudar a la comunidad en general
+                    a conocer sobre los trastornos mentales causados por la cuarentena a causa del
+                    virus Covid-19
 
-    </main>
+                </p>
+            </div>
+        </div>
+        <div class="footer-section contact icon">
+            <div>
+                <p>Contactos</p>
+                <div><i class="fa fa-phone" aria-hidden="true"></i> +593-0987451235 Henry Chiluiza</div>
+                <div><i class="fa fa-phone" aria-hidden="true"></i> +593-0965471248 Daniel Iza</div>
+                <div><i class="fa fa-phone" aria-hidden="true"></i> +593-0974124369 Xavier Jaya</div>
+                <div><i class="fa fa-phone" aria-hidden="true"></i> +593-0991234723 Ian Masache</div>
+                <div><i class="fa fa-phone" aria-hidden="true"></i>+593-0997465832 Andres Salazar</div>
+                <div><i class="fa fa-phone" aria-hidden="true"></i> +593-0997456891 Atik Yumbay</div>
+                <div> <i class="fa fa-envelope-o" aria-hidden="true"></i> grupo6@infomental.com</div>
+            </div>
+        </div>
+        <div class="footer-section  links">
+            <div>
+                <p>Siguenos en nuestras redes sociales </p>
+                <div class="icon">
+                    <a href="https://www.facebook.com"><i class="fa fa-facebook " aria-hidden="true"></i>infoMentalEc</a><br />
+                    <a href="https://www.instagram.com/?hl=es-la"><i class="fa fa-instagram " aria-hidden="true"></i>@infoMentalEc</a><br />
+                    <a href="https://twitter.com/home"><i class="fa fa-twitter " aria-hidden="true"></i>infoMentalEc</a><br />
+                </div>
+            </div>
+        </div>
+    </div>
 
-
+    <div id="container"><hr id="linea" /><h4><small> &#169 2020 Todos los derechos reservados. Diseñado por Grupo 6</small></h4></div>
+</footer>
 </div>
 
 <script>
     var subtotal=0;
 </script>
-
-<script type="text/javascript" src="./public/js/carro.js"></script>
+<script type="text/javascript" src="./public/js/carrito.js"></script>
 <script>
     var app = new Vue({
-  el: '#app',
-  data(){
-        return{
-            selected:'',direcciones:[],direcc:'nuevo',imagen:'',
-            direccion:{
-                imagendireccion:null,
-                subtotal:0,
-                iva:0,
-                totalpag:0,
-                provincia:'',
-                ciudad:'',
-                sector:'',
-                calleprincipal:'',
-                callesecundaria:'',
-                numerodecasa:'',
-                telefonocliente:'',
-                iddireccion:'',
-            },
-            activodireccion:false,activocel:false,respuesta:[],direc:'viejo',
-            i:0,totap:0,subtot:0,tap:true,izder:true,transicion:'entar1',
-            confirmado:false,
-        }
-    },
-    /*validations:{
-        direccion:{
-            provincia:{
-                required
-            },
-            ciudad:{
-                required
-            },
-            sector:{
-                required
-            },
-            calleprincipal:{
-                required
-            },
-            callesecundaria:{
-                required
-            },
-            numerodecasa:{
-                required
-            },
-            telefonocliente:{
-                ceroynueve,
-                minLength:minLength(10),
-                maxLength:maxLength(10),
+        el: '#app',
+        data(){
+            return{
+                selected:'',direcciones:[],direcc:'nuevo',imagen:'',
+                direccion:{
+                    imagendireccion:null,
+                    subtotal:0,
+                    iva:0,
+                    totalpag:0,
+                    provincia:'',
+                    ciudad:'',
+                    sector:'',
+                    calleprincipal:'',
+                    callesecundaria:'',
+                    numerodecasa:'',
+                    telefonocliente:'',
+                    iddireccion:'',
+                },
+                activodireccion:false,activocel:false,completo:true,direc:'viejo',
+                i:0,totap:0,subtot:0,tap:true,izder:true,transicion:'entar1',
+                confirmado:false,modaldirec:false,modalconfirmar:false,celular:'',
+                invalido:false,valido:false,focused: false
             }
-        }
-    },*/
-    mounted(){
-        /*axios.get('/clientedirecciones')
-        .then((response)=>{
-            this.direcciones=response.data.data;
-        })
-        .catch(function(error){
-            console.log(error)
-        });*/
-       $(function(){
-            $('#modal2').modal({
-                backdrop:'static',
-                keyboard:false,
-                focus:false,
-                show:false,
+        },
+        mounted(){
+            $(function(){
+                $('#modal1').modal({
+                    backdrop:'static',
+                    keyboard:false,
+                    focus:false,
+                    show:false,
                 });
             });
-    },
-    computed:{
-        transi(){
-        if(!this.izder)
-            this.transicion='entar';
-        else
-            this.transicion='entar1';
-        return this.transicion;
-        
         },
-        
-    },
-    methods:{
-        /*status(validacion) {
-            return {
-                incorrecto: validacion.$error,
-                correcto: !validacion.$invalid,
-            }
-        },*/
-        agregardireccion(){
-            this.subtot=subtotal;
-            this.i=parseFloat(subtotal*0.12).toFixed(2);
-            this.direccion.iva=(this.i++);
-            this.direccion.subtotal=(this.subtot++);
-            this.tap=parseFloat(this.direccion.iva+this.direccion.subtotal).toFixed(2);
-            this.direccion.totalpag=(this.tap++);
-            if(this.direccion.iddireccion=='')
-                this.direccion.iddireccion=this.direcciones.length+1;
-            else
-                this.direccion.iddireccion=this.direcciones.length;
-            /*if(!(this.$v.direccion.provincia.$invalid || this.$v.direccion.ciudad.$invalid ||
-                this.$v.direccion.sector.$invalid || this.$v.direccion.calleprincipal.$invalid ||
-                this.$v.direccion.callesecundaria.$invalid || this.$v.direccion.numerodecasa.$invalid))
-            {
-            this.activodireccion=false;
-            this.activocel=true;
-            }
-            else{
-                toastr.error("Los campos de la direccion son obligatorios")
-            }*/
-            this.activodireccion=false;
-            this.activocel=true;
-            this.tap=false;
-            //console.log(this.direccion);
-        },
-        /*prevenir:  function(){
-             if(this.$v.direccion.telefonocliente.$invalid)
-                return false;
-        },*/
-        confirmar(){
-            console.log(this.direccion)
-            axios.post('/apiconfirmar',this.direccion)
-            .then((response)=>{
-            })
-            .catch(function(error){
-                console.log(error)
-            });
-            axios.post('/api/enviarsms',this.direccion)
-            .then((response)=>{
-                if (! (Notification)) {
-                    alert('Web Notification is not supported');
-                    return;
+        computed:{
+            transi(){
+                if(!this.izder)
+                    this.transicion='entar1';
+                else
+                    this.transicion='entar';
+                return this.transicion;
+            },
+            telfcelular(){
+                if(this.celular!=''&&(this.celular.length<10||this.celular.length>10||this.celular.substr(0,2)!='09')){
+                    this.invalido=true;
+                    this.valido=false;
+                    console.log(this.celular.substr(0,2));
+                }
+                else {
+                    if(this.celular.length == 10){
+                        this.invalido=false;
+                        this.valido=true;
+                        if (! (Notification)) {
+                            alert('Web Notification is not supported');
+                            return;
+                        }
+                        if(Notification.permission !=="granted")
+                            Notification.requestPermission();
+                        else
+                        {
+                            let notification = new Notification('Pedido generado correctamente', {
+                                icon: "./public/images/correcto.png",
+                                body:"En breve le llegara un sms",
+                            });
+                        }
                     }
-                    if(Notification.permission !=="granted")
-                        Notification.requestPermission();
-                    else
-                    {
-                        let notification = new Notification('Pedido generado correctamente', {
-                            data:'En breve le llegara un sms',
-                            icon: "../images/correcto.png" // optional image url
-                        });
-                    }
-            })
-            .catch(function(error){
-                console.log(error)
-            });
-            $(function(){
-                $('#modal1').modal('hide');
-                $('#modal2').modal('hide');
-            });
-        },
-        asignarruta(e){
-            this.imagen=e.target.files[0].name;
-            this.direccion.imagendireccion=this.imagen;
-        },
-        asignar(index){
-            if(!index=='')
-                this.direccion=this.direcciones[parseInt(index)];
-        },
-        borrar(){
-            this.direccion={
-                imagendireccion:null,
-                subtotal:0,
-                iva:0,
-                totalpag:0,
-                provincia:'',
-                ciudad:'',
-                sector:'',
-                calleprincipal:'',
-                callesecundaria:'',
-                numerodecasa:'',
-                telefonocliente:'',
-                iddireccion:''
-            }
-            console.log(this.direccion);
-        },
-        puest(validacion){
-            return {
-                puesto:!validacion.$invalid
+                }
             }
         },
-        confirmarsubtotal(){
-            this.subtot=subtotal;
-            this.i=parseFloat(subtotal*0.12).toFixed(2);
-            console.log(this.i+this.subtot);
-            this.totap=parseFloat(parseFloat(this.i)+parseFloat(this.subtot)).toFixed(2);
+        methods:{
+            controlFormatoCelular(){
+                console.log(celular.value);
+            },
+            agregardireccion(){
+                this.subtot=subtotal;
+                this.i=parseFloat(subtotal*0.12).toFixed(2);
+                this.direccion.iva=(this.i++);
+                this.direccion.subtotal=(this.subtot++);
+                this.totap=parseFloat(this.direccion.iva+this.direccion.subtotal).toFixed(2);
+                this.direccion.totalpag=(this.totap++);
+                if(this.direccion.iddireccion=='')
+                    this.direccion.iddireccion=this.direcciones.length+1;
+                else
+                    this.direccion.iddireccion=this.direcciones.length;
+                /*if((this.direccion.provincia!="" || this.direccion.ciudad!="" ||
+                    this.direccion.sector!="" || this.direccion.calleprincipal!="" ||
+                    this.direccion.callesecundaria!="" || this.direccion.numerodecasa!=""))
+                {
+                this.activodireccion=false;
+                this.activocel=true;
+                }
+                else{
+                    toastr.error("Los campos de la direccion son obligatorios")
+                }/**/
+                this.activodireccion=false;
+                this.activocel=true;
+                this.tap=false;
+                //console.log(this.direccion);
+            },
+            prevenir:  function(){
+                console.log(this.direccion.telefonocliente=="")
+                /*if(this.direccion.telefonocliente=="")
+                    return true;*/
+            },
+            confirmar(){
+                console.log(this.direccion)
+                axios.post('/apiconfirmar',this.direccion)
+                    .then((response)=>{
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    });
+                axios.post('/api/enviarsms',this.direccion)
+                    .then((response)=>{
+                        if (! (Notification)) {
+                            alert('Web Notification is not supported');
+                            return;
+                            }
+                            if(Notification.permission !=="granted")
+                                Notification.requestPermission();
+                            else
+                            {
+                                let notification = new Notification('Pedido generado correctamente', {
+                                    data:'En breve le llegara un sms',
+                                    icon: "../images/correcto.png" // optional image url
+                                });
+                            }
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    });
+                $(function(){
+                    $('#modal1').modal('hide');
+                    $('#modal2').modal('hide');
+                });
+            },
+            asignarruta(e){
+                this.imagen=e.target.files[0].name;
+                this.direccion.imagendireccion=this.imagen;
+                console.log(e);
+            },
+            asignar(index){
+                if(!index=='')
+                    this.direccion=this.direcciones[parseInt(index)];
+            },
+            borrar(){
+                this.direccion={
+                    imagendireccion:null,
+                    subtotal:0,
+                    iva:0,
+                    totalpag:0,
+                    provincia:'',
+                    ciudad:'',
+                    sector:'',
+                    calleprincipal:'',
+                    callesecundaria:'',
+                    numerodecasa:'',
+                    telefonocliente:'',
+                    iddireccion:''
+                }
+                console.log(this.direccion);
+            },
+            correcto(){
+                return {
+                    is_invalid:this.invalido,
+                    is_valid:this.valido
+                }
+            },
+            confirmarsubtotal(){
+                this.subtot=subtotal;
+                this.i=parseFloat(subtotal*0.12).toFixed(2);
+                console.log(this.i+this.subtot);
+                this.totap=parseFloat(parseFloat(this.i)+parseFloat(this.subtot)).toFixed(2);
+            },
+            onFocus(){
+                this.focused = true
+            },
+            onBlur(){
+                this.focused = false;
+                console.log("se perdió el foco");
+            }
         }
-    }
     })
 </script>
 <?php
-if(isset($_SESSION['carrito'])){
+    if(isset($_SESSION['carrito'])){
     for($x=0;$x<count($_SESSION['carrito']);$x++){
 ?>
 <script type="text/javascript">
@@ -243,9 +278,12 @@ if(isset($_SESSION['carrito'])){
     //document.querySelector('.subtotal').innerHTML=0;
 </script>
 <?php
+        }
     }
-}
 ?>
+
+<script type="text/javascript" src="./public/js/toastr.js"></script>
+
 <script type="text/javascript" src="./public/js/calculos.js"></script>
 <script type="text/javascript" src="./public/js/agregaralcarrito.js"></script>
 <!-- Optional JavaScript; choose one of the two! -->
